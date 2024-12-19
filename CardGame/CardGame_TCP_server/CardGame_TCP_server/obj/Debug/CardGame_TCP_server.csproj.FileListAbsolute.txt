@@ -1,0 +1,10 @@
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.exe.config
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.exe
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.pdb
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.AssemblyReference.cache
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.Form1.resources
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.Properties.Resources.resources
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.GenerateResource.cache
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.CoreCompileInputs.cache
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.exe
+C:\Users\m306\Desktop\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.pdb

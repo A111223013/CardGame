@@ -23,5 +23,10 @@ namespace CardGame
             form2.Show();                // 顯示 Form1
             this.Hide();                 // 隱藏當前的 Form (例如: Form2)
         }
+        // 設定結果文字
+        public void SetResult(string resultText)
+        {
+            label19.Text = resultText; // 假設結果顯示的 Label 名為 labelResult
+        }
     }
 }

@@ -27,6 +27,64 @@ namespace CardGame
         private List<Card> currentHand; // 當前手牌
         private Random random = new Random();
         private bool isPlayerTurn = true; // 預設玩家回合
+                                          // 玩家類別與主要屬性
+        public class Player
+        {
+            public int Health { get; set; } = 20;
+            public int Shield { get; set; } = 0;
+            public int Energy { get; set; } = 10;
+
+            public void TakeDamage(int damage)
+            {
+                if (Shield > 0)
+                {
+                    int remainingDamage = damage - Shield;
+                    Shield = Math.Max(0, Shield - damage);
+                    Health = Math.Max(0, Health - Math.Max(0, remainingDamage));
+                }
+                else
+                {
+                    Health = Math.Max(0, Health - damage);
+                }
+            }
+
+            public void BuffAttack(int value)
+            {
+                // 假設增加玩家攻擊力的狀態（未實現完全邏輯）
+            }
+        }
+
+        // 敵人類別與行為
+        public class Enemy
+        {
+            public int Health { get; set; } = 20;
+            public int Shield { get; set; } = 5;
+
+            public void TakeDamage(int damage)
+            {
+                if (Shield > 0)
+                {
+                    int remainingDamage = damage - Shield;
+                    Shield = Math.Max(0, Shield - damage);
+                    Health = Math.Max(0, Health - Math.Max(0, remainingDamage));
+                }
+                else
+                {
+                    Health = Math.Max(0, Health - damage);
+                }
+            }
+
+            public void TakeTrueDamage(int damage)
+            {
+                Health = Math.Max(0, Health - damage);
+            }
+
+            public void PerformAction(Player player)
+            {
+                MessageBox.Show("敵人攻擊你，造成3點傷害！");
+                player.TakeDamage(3);
+            }
+        }
 
 
         // 卡牌名稱與描述
@@ -193,6 +251,7 @@ namespace CardGame
             {
                 case "丟石頭":
                     MessageBox.Show("你丟出石頭，對敵方造成2點傷害！");
+
                     break;
                 case "斬擊":
                     MessageBox.Show("你使用斬擊，造成3點傷害！");
@@ -262,6 +321,32 @@ namespace CardGame
             button1.Enabled = false;
             isPlayerTurn = false;
             NextTurn();
+        }
+        // 假設你已經有一個勝負結果頁面 Form3
+        Form3 resultPage = new Form3();
+
+        private void CheckGameOver()
+        {
+            if (int.Parse(label13.Text) <= 0 || int.Parse(label16.Text )<= 0)
+            {
+                // 判斷結果
+                if (int.Parse(label13.Text) <= 0 && int.Parse(label16.Text) > 0)
+                {
+                    resultPage.SetResult("你輸了！");
+                }
+                else if (int.Parse(label16.Text) <= 0 && int.Parse(label13.Text) > 0)
+                {
+                    resultPage.SetResult("你贏了！");
+                }
+                else
+                {
+                    resultPage.SetResult("同歸於盡!!");
+                }
+
+                // 切換到結果頁面
+                this.Hide(); // 隱藏當前頁面
+                resultPage.Show(); // 顯示結果頁面
+            }
         }
     }
 }
