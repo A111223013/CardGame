@@ -8,3 +8,13 @@ C:\Users\shu\Downloads\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSe
 C:\Users\shu\Downloads\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.csproj.CoreCompileInputs.cache
 C:\Users\shu\Downloads\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.exe
 C:\Users\shu\Downloads\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.pdb
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\bin\Debug\CardGameSever.exe.config
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\bin\Debug\CardGameSever.exe
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\bin\Debug\CardGameSever.pdb
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.csproj.AssemblyReference.cache
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.Form1.resources
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.Properties.Resources.resources
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.csproj.GenerateResource.cache
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.csproj.CoreCompileInputs.cache
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.exe
+C:\Users\m303\Desktop\CardGame\CardGameSever\CardGameSever\obj\Debug\CardGameSever.pdb

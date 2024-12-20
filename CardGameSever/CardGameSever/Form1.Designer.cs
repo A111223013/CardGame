@@ -35,11 +35,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(521, 160);
+            this.button1.Location = new System.Drawing.Point(517, 67);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 38);
             this.button1.TabIndex = 0;
@@ -83,7 +85,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(96, 248);
+            this.listBox1.Location = new System.Drawing.Point(18, 175);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(216, 88);
             this.listBox1.TabIndex = 5;
@@ -92,17 +94,38 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(108, 212);
+            this.label3.Location = new System.Drawing.Point(30, 139);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "線上使用者";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(378, 139);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 16);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "系統訊息";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 12;
+            this.listBox2.Location = new System.Drawing.Point(366, 175);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(216, 88);
+            this.listBox2.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 442);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label2);
@@ -128,6 +151,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
 

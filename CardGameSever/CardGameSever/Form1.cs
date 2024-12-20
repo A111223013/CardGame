@@ -58,8 +58,9 @@ namespace CardGameSever
                 try                //用 Sck 來接收此客戶訊息，inLen 是接收訊息的 byte 數目
                 {
                     byte[] B = new byte[1023];   //建立接收資料用的陣列，長度須大於可能的訊息
-                    int inLen = Sck.Receive(B);  //接收網路資訊(byte陣列)
+                    int inLen = Sck.Receive(B);  //接收網路資訊(byte陣
                     string Msg = Encoding.Default.GetString(B, 0, inLen); //翻譯實際訊息(長度inLen)
+                    listBox2.Items.Add("(接收)" + Msg);
                     string Cmd = Msg.Substring(0, 1);                     //取出命令碼 (第一個字)
                     string Str = Msg.Substring(1);                        //取出命令碼之後的訊息
                     switch (Cmd)                                          //依據命令碼執行功能
@@ -75,6 +76,7 @@ namespace CardGameSever
                             {
                                 string reply = "D" + Str + "使用者名稱重複";
                                 B = Encoding.Default.GetBytes(reply);
+                                listBox2.Items.Add("(傳送)" + reply);
                                 Sck.Send(B, 0 , B.Length, SocketFlags.None);
                                 Th.Abort();
                             }
@@ -103,6 +105,7 @@ namespace CardGameSever
         }
         private void SendTo(string Str, string User)
         {
+            listBox2.Items.Add("(傳送)" + Str + ":" + User);
             byte[] B = Encoding.Default.GetBytes(Str);  //訊息轉譯為byte陣列
             Socket Sck = (Socket)HT[User];              //取出發送對象User的通訊物件
             Sck.Send(B, 0, B.Length, SocketFlags.None); //發送訊息
@@ -110,6 +113,7 @@ namespace CardGameSever
         //傳送訊息給所有的線上客戶
         private void SendAll(string Str)
         {
+            listBox2.Items.Add("(傳送)" + Str);
             byte[] B = Encoding.Default.GetBytes(Str);   //訊息轉譯為Byte陣列
             foreach (Socket s in HT.Values)              //HT雜湊表內所有的Socket
                 s.Send(B, 0, B.Length, SocketFlags.None);//傳送資料
