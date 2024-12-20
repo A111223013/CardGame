@@ -26,7 +26,15 @@ namespace CardGame
         Socket T;                                          //通訊物件
         Thread Th;                                         //網路監聽執行緒
         string User;                                       //使用者
-
+        private string MyIP()
+        {
+            string hn = Dns.GetHostName();
+            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList;
+            foreach (IPAddress it in ip)
+                if (it.AddressFamily == AddressFamily.InterNetwork)
+                    return it.ToString();
+            return "";
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form1 = new Form1();  // 創建 Form1 實例
@@ -192,6 +200,11 @@ namespace CardGame
             {
                 Txt_system_message.Text = message;
             }
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            this.Text += " " + MyIP(); // 顯示本機 IP
         }
     }
 }

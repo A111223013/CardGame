@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +15,14 @@ namespace CardGame
 {
     public partial class Form1 : Form
     {
+        private Thread Th; // 監聽執行緒
+        private bool connected = false; // 是否連接'
+        Socket T;
+        string User;
+        bool ive = false;
+
+        string my;
+        bool Turn = true;
         public Form1()
         {
             InitializeComponent();
