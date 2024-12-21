@@ -58,3 +58,15 @@ C:\Users\m303\Desktop\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csp
 C:\Users\m303\Desktop\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.CoreCompileInputs.cache
 C:\Users\m303\Desktop\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.exe
 C:\Users\m303\Desktop\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.pdb
+D:\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.exe.config
+D:\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.exe
+D:\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.pdb
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.AssemblyReference.cache
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form1.resources
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form2.resources
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form3.resources
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Properties.Resources.resources
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.GenerateResource.cache
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.CoreCompileInputs.cache
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.exe
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.pdb

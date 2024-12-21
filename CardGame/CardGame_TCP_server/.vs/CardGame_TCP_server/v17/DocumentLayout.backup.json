@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\m306\\Desktop\\CardGame\\CardGame\\CardGame_TCP_server\\",
+  "WorkspaceRootPath": "D:\\CardGame\\CardGame\\CardGame_TCP_server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|c:\\users\\m306\\desktop\\cardgame\\cardgame\\cardgame_tcp_server\\cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|d:\\cardgame\\cardgame\\cardgame_tcp_server\\cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|solutionrelative:cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|c:\\users\\m306\\desktop\\cardgame\\cardgame\\cardgame_tcp_server\\cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|D:\\CardGame\\CardGame\\CardGame_TCP_server\\cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{25F15764-A595-4ECE-81C8-57769293F3D2}|CardGame_TCP_server\\CardGame_TCP_server.csproj|solutionrelative:cardgame_tcp_server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -18,17 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\m306\\Desktop\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
+              "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
               "RelativeDocumentMoniker": "CardGame_TCP_server\\Form1.cs",
-              "ToolTip": "C:\\Users\\m306\\Desktop\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
+              "ToolTip": "D:\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
               "RelativeToolTip": "CardGame_TCP_server\\Form1.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAUwEcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAUwJsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T02:16:47.471Z",
               "EditorCaption": ""
@@ -37,13 +41,23 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\m306\\Desktop\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
+              "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs",
               "RelativeDocumentMoniker": "CardGame_TCP_server\\Form1.cs",
-              "ToolTip": "C:\\Users\\m306\\Desktop\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs [\u8A2D\u8A08]",
+              "ToolTip": "D:\\CardGame\\CardGame\\CardGame_TCP_server\\CardGame_TCP_server\\Form1.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "CardGame_TCP_server\\Form1.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-16T02:28:22.133Z",
               "EditorCaption": " [\u8A2D\u8A08]"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }

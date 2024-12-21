@@ -16,13 +16,14 @@ namespace CardGame
     public partial class Form1 : Form
     {
         private Thread Th; // 監聽執行緒
-        private bool connected = false; // 是否連接'
+        private bool connected = false; // 是否連接
+        public static bool Turn = true; // 共享回合狀態
         Socket T;
         string User;
         bool ive = false;
 
         string my;
-        bool Turn = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -63,6 +64,35 @@ namespace CardGame
                 // 假設增加玩家攻擊力的狀態（未實現完全邏輯）
             }
         }
+
+        private void UpdateButtonStates()
+        {
+            // 假設 button1 是用於結束回合的按鈕，永遠應該啟用
+            button1.Enabled = true;
+
+            // 根據當前回合切換按鈕啟用狀態
+            foreach (var control in this.Controls)
+            {
+                if (control is Button btn)
+                {
+                    if (Turn) // 玩家1的回合
+                    {
+                        if (btn.Name.StartsWith("Player1"))
+                            btn.Enabled = true; // 啟用玩家1的按鈕
+                        else if (btn.Name.StartsWith("Player2"))
+                            btn.Enabled = false; // 禁用玩家2的按鈕
+                    }
+                    else // 玩家2的回合
+                    {
+                        if (btn.Name.StartsWith("Player2"))
+                            btn.Enabled = true; // 啟用玩家2的按鈕
+                        else if (btn.Name.StartsWith("Player1"))
+                            btn.Enabled = false; // 禁用玩家1的按鈕
+                    }
+                }
+            }
+        }
+
 
         // 敵人類別與行為
         public class Enemy
@@ -328,9 +358,22 @@ namespace CardGame
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Enabled = false;
-            isPlayerTurn = false;
-            NextTurn();
+            // 切換回合狀態
+            Turn = !Turn; // 切換回合
+
+            // 更新回合狀態顯示
+            UpdateButtonStates();
+
+            if (Turn)
+                label6.Text = "現在是玩家1的回合";
+            else
+                label6.Text = "現在是玩家2的回合";
+
+            // 傳送回合更新給其他分頁
+            
+            //button1.Enabled = false;
+            //isPlayerTurn = false;
+            //NextTurn();
         }
         // 假設你已經有一個勝負結果頁面 Form3
         Form3 resultPage = new Form3();
