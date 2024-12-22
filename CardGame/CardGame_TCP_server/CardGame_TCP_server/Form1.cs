@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace CardGame_TCP_server
 {
@@ -21,6 +22,8 @@ namespace CardGame_TCP_server
         Thread Th_Svr;                  //伺服器監聽用執行緒(電話總機開放中)
         Thread Th_Clt;                  //客戶用的通話執行緒(電話分機連線中)
         Hashtable HT = new Hashtable(); //客戶名稱與通訊物件的集合(雜湊表)(key:Name, Socket)
+        private static Dictionary<string, Socket> players = new Dictionary<string, Socket>();
+        private static Random random = new Random();
         public Form1()
         {
             InitializeComponent();
@@ -66,6 +69,7 @@ namespace CardGame_TCP_server
         {
             Socket Sck = Client; //複製Client通訊物件到個別客戶專用物件Sck
             Thread Th = Th_Clt;  //複製執行緒Th_Clt到區域變數Th
+            string username = ""; // 儲存玩家名稱
             while (true)         //持續監聽客戶傳來的訊息
             {
                 try                //用 Sck 來接收此客戶訊息，inLen 是接收訊息的 byte 數目
@@ -106,6 +110,7 @@ namespace CardGame_TCP_server
                             break;
 
                        
+
                         default:                        //使用者傳送私密訊息
                             string[] C = Str.Split('|');//切開訊息與收件者
                             SendTo(Cmd + C[0], C[1]);   //C[0]是訊息，C[1]是收件者

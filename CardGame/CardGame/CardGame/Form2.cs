@@ -21,13 +21,12 @@ namespace CardGame
         public Form2()
         {
             InitializeComponent();
-            Turn = -1; // 默認值，表示未決定
         }
         //公用變數
         Socket T;                                          //通訊物件
         Thread Th;                                         //網路監聽執行緒
         string User;    //使用者
-        string my;    
+        string my;
         Form1 form1 = new Form1();
         private string send_sever_message;
         private string MyIP()
@@ -41,15 +40,9 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();  // 創建 Form1
-            form1.OnDataSent += test_send;
-            form1.OnCardSent += card_send;// 實例
-            form1.OpponentName = listBox1.SelectedItem?.ToString(); // 設置對手名稱
-            form1.OnCardSkillSent += CardSkill;
-            form1.Updata_game();
-            Send($"START|{User}|{form1.OpponentName}");
-            form1.Show();                // 顯示 Form1
-            this.Hide();                 // 隱藏當前的 Form (例如: Form2)
+            string message = $"W|{Txt_username.Text.Trim()}"; // 發送玩家名稱請求
+            Send(message);
+            StartGame(isPlayerTurn: true);
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -184,13 +177,13 @@ namespace CardGame
                         for (int i = 0; i < M.Length; i++) listBox1.Items.Add(M[i]);
                         break;
                     case "5":
-                        DialogResult result = MessageBox.Show("是排遊玩卡牌對戰" , "重玩訊息", MessageBoxButtons.YesNo);
+                        DialogResult result = MessageBox.Show("是排遊玩卡牌對戰", "重玩訊息", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                         {
                             listBox1.Text = Str;
                             listBox1.Enabled = false;
                             Send("P" + "Y" + "|" + listBox1.SelectedItem);
-                        
+
                         }
                         else
                         {
@@ -206,13 +199,13 @@ namespace CardGame
                         }
                         else
                         {
-                            
+
                             MessageBox.Show("抱歉" + listBox1.SelectedItem.ToString() + "覺得你太爛!");
                         }
 
 
                         break;
-                   
+
                     case "D":
                         Txt_system_message.Text = Str;
                         MessageBox.Show("使用者名稱重複了");
@@ -254,9 +247,63 @@ namespace CardGame
                         }
                         break;
 
+                    case "W":
+                        string[] A = Str.Split('|');
+                        string status = A[0];             // "OK" 或 "FAIL"
+                        string playerName = A.Length > 1 ? A[1] : ""; // 提取玩家名稱
 
+                        if (status == "OK")
+                        {
+                            MessageBox.Show($"成功連接伺服器！玩家：{playerName}");
+                            Invoke(new Action(() =>
+                            {
+                                MessageBox.Show("ok");
+                            }));
+                        }
+                        else if (status == "FAIL")
+                        {
+                            MessageBox.Show($"無法連接伺服器，請檢查玩家名稱：{playerName}");
+                            Invoke(new Action(() =>
+                            {
+                                MessageBox.Show("fail");
+                            }));
+                        }
+                        break;
 
                 }
+            }
+        }
+        private void StartGame(bool isPlayerTurn)
+        {
+            Form1 form1 = new Form1();  // 创建游戏界面
+            form1.OnDataSent += test_send;
+            form1.OnCardSent += card_send;  // 绑定事件
+            form1.OnCardSkillSent += CardSkill;
+            form1.IsPlayerTurn = isPlayerTurn;  // 设置玩家先后手状态
+            form1.OpponentName = listBox1.SelectedItem?.ToString();  // 设置对手名称
+
+            form1.Updata_game();
+            form1.Show();  // 显示游戏界面
+            this.Hide();   // 隐藏当前登录界面
+        }
+        private void HandleTurnMessage(string turnPlayer)
+        {
+            // 确保 turnPlayer 和本地用户名比较正确
+            if (turnPlayer.Trim() == Txt_username.Text.Trim())
+            {
+                // 玩家是先手
+                Invoke(new Action(() =>
+                {
+                    StartGame(isPlayerTurn: true); // 启动游戏界面，并设置为先手
+                }));
+            }
+            else
+            {
+                // 玩家是后手
+                Invoke(new Action(() =>
+                {
+                    StartGame(isPlayerTurn: false); // 启动游戏界面，并设置为后手
+                }));
             }
         }
     }

@@ -21,6 +21,7 @@ namespace CardGame
         public event Action<string> OnDataSent;
         public event Action<string> OnCardSent;
         public event Action<string> OnCardSkillSent;
+        public bool IsPlayerTurn { get; set; } // 是否轮到玩家操作
         private Form2 form2;
         private Thread Th; // 监听线程
         private bool connected = false; // 是否连接到服务器
@@ -51,17 +52,7 @@ namespace CardGame
         public Form1()
         {
             InitializeComponent();
-            this.turn = turn;
-
-            // 根據先後手值設置遊戲狀態
-            if (turn == 1)
-            {
-                MessageBox.Show("你是先攻！");
-            }
-            else
-            {
-                MessageBox.Show("你是後攻！");
-            }
+            
         }
 
 
@@ -150,12 +141,48 @@ namespace CardGame
             currentHand = DrawRandomCards(5);
             LoadCards();
             UpdateStatusUI();
-
+            UpdateTurnUI(); // 根据 IsPlayerTurn 设置界面状态
         }
 
 
-        // 卡牌名稱與描述
+        // 根据玩家先后手状态更新界面
+        private void UpdateTurnUI()
+        {
+            if (IsPlayerTurn)
+            {
+                label19.Text = "你的回合，請操作！";
+                EnableGameControls();
+            }
+            else
+            {
+                label19.Text = "等待对方操作...";
+                DisableGameControls();
+            }
+        }
+        private void EnableGameControls()
+        {
+            button1.Enabled = true;
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is PictureBox)
+                {
+                    ctrl.Enabled = true;
+                }
+            }
+        }
 
+        // 禁用操作控件
+        private void DisableGameControls()
+        {
+            button1.Enabled = false;
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is PictureBox)
+                {
+                    ctrl.Enabled = false;
+                }
+            }
+        }
 
         // 随机抽取卡牌
         private List<Card> DrawRandomCards(int count)
@@ -362,6 +389,7 @@ namespace CardGame
         private void button1_Click(object sender, EventArgs e)
         {
             //結束回合輪到對手
+            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
