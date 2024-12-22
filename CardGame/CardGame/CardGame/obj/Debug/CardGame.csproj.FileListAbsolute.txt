@@ -70,3 +70,16 @@ D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.GenerateResourc
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.CoreCompileInputs.cache
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.exe
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.pdb
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.exe.config
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.exe
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\bin\Debug\CardGame.pdb
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form1.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form2.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form3.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Properties.Resources.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.GenerateResource.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.exe
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.pdb

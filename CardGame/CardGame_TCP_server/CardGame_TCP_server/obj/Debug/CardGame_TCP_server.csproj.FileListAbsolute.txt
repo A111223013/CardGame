@@ -28,3 +28,14 @@ D:\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_
 D:\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.CoreCompileInputs.cache
 D:\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.exe
 D:\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.pdb
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.exe.config
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.exe
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\bin\Debug\CardGame_TCP_server.pdb
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.Form1.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.Properties.Resources.resources
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.GenerateResource.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.exe
+C:\Users\User\OneDrive\Document\GitHub\CardGame\CardGame\CardGame_TCP_server\CardGame_TCP_server\obj\Debug\CardGame_TCP_server.pdb

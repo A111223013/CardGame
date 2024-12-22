@@ -26,7 +26,9 @@ namespace CardGame
         Socket T;                                          //通訊物件
         Thread Th;                                         //網路監聽執行緒
         string User;    //使用者
-        string my;
+        string my;    
+        Form1 form1 = new Form1();
+        private string send_sever_message;
         private string MyIP()
         {
             string hn = Dns.GetHostName();
@@ -38,7 +40,10 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();  // 創建 Form1 實例
+            Form1 form1 = new Form1();  // 創建 Form1
+            form1.OnDataSent += test_send;
+            form1.OnCardSent += card_send;// 實例
+            form1.Updata_game();
             form1.Show();                // 顯示 Form1
             this.Hide();                 // 隱藏當前的 Form (例如: Form2)
         }
@@ -53,6 +58,7 @@ namespace CardGame
 
         private void btn_start_Click(object sender, EventArgs e)
         {
+            form1.send_server_Message = "伺服器ip" + textBox2.Text + "\n 伺服器port" + textBox1.Text + "\n玩家名稱" + Txt_username.Text;
             Control.CheckForIllegalCrossThreadCalls = false;
             User = Txt_username.Text;
             if (string.IsNullOrWhiteSpace(User))
@@ -62,6 +68,8 @@ namespace CardGame
             }
             string IP = textBox2.Text;
             int Port = int.Parse(textBox1.Text);
+            form1.server_ip = IP;
+            form1.server_port = Port;
             try
             {
                 IPEndPoint EP = new IPEndPoint(IPAddress.Parse(IP), Port);
@@ -95,7 +103,18 @@ namespace CardGame
             byte[] B = Encoding.Default.GetBytes(Str);
             T.Send(B, 0, B.Length, SocketFlags.None);
         }
+        public void test_send(string cmd)
+        {
+            string[] F = cmd.Split(',');
+            MessageBox.Show(F[0] + F[1]);
+            Send("T" + cmd + "|" + listBox1.SelectedItem);
+        }
+        public void card_send(string cmd)
+        {
+            Send("M" + cmd + "|" + listBox1.SelectedItem);
 
+
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
             this.Text += " " + MyIP(); // 顯示本機 IP
@@ -157,39 +176,13 @@ namespace CardGame
                         for (int i = 0; i < M.Length; i++) listBox1.Items.Add(M[i]);
                         break;
                     case "5":
-                        DialogResult result = MessageBox.Show("是否遊玩卡排對戰" , "重玩訊息", MessageBoxButtons.YesNo);
+                        DialogResult result = MessageBox.Show("是排遊玩卡牌對戰" , "重玩訊息", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                         {
                             listBox1.Text = Str;
                             listBox1.Enabled = false;
                             Send("P" + "Y" + "|" + listBox1.SelectedItem);
-                            Random rnd = new Random();
-                            int[] mark = new int[25];
-                            int num;
-
-                            for (int i = 0; i < 25; i++)
-                            {
-                                Button D = (Button)this.Controls["B" + i.ToString()];
-                                D.Enabled = true;
-                                D.Tag = "_";
-
-
-
-
-                            }
-
-                            for (int i = 0; i < 25; i++) mark[i] = 0;
-                            for (int i = 0; i < 25; i++)
-                            {
-                                do
-                                {
-                                    num = rnd.Next(0, 25);
-                                } while (mark[num] != 0);
-                                mark[num] = 1;
-                                this.Controls["B" + i.ToString()].Text = (num + 1).ToString();
-                            }
-
-                            Txt_system_message.Text = "輪我下";
+                        
                         }
                         else
                         {
@@ -202,32 +195,6 @@ namespace CardGame
                         if (Str == "Y")
                         {
                             MessageBox.Show(listBox1.SelectedItem.ToString() + "接受您的邀請，開始重玩遊戲ㄌ!");
-                           
-                            Random rnd = new Random();
-                            int[] mark = new int[25];
-                            int num;
-                            for (int i = 0; i < 25; i++)
-                            {
-                                Button D = (Button)this.Controls["B" + i.ToString()];
-                                D.Enabled = true;
-
-                                D.Tag = "_";
-                            }
-                            for (int i = 0; i < 25; i++) mark[i] = 0;
-                            for (int i = 0; i < 25; i++)
-                            {
-                                do
-                                {
-                                    num = rnd.Next(0, 25);
-                                } while (mark[num] != 0);
-                                mark[num] = 1;
-                                this.Controls["B" + i.ToString()].Text = (num + 1).ToString();
-                            }
-
-                            Txt_system_message.Text = "輪我下";
-                            btn_in_user.Enabled = false;
-
-
                         }
                         else
                         {
@@ -237,79 +204,7 @@ namespace CardGame
 
 
                         break;
-                    case "6":
-                        string[] A = Str.Split(':');
-                        if (A[1] != "-1")
-                        {
-                            for (int i = 0; i < 25; i++)
-                            {
-                                if (this.Controls["B" + i.ToString()].Text == A[1])
-                                {
-                                    this.Controls["B" + i.ToString()].Tag = "0";
-                                    this.Controls["B" + i.ToString()].Enabled = false;
-                                    this.Controls["B" + i.ToString()].BackColor = Color.Red;
-                                    break;
-                                }
-                            }
-
-
-                            my = "";
-                            for (int i = 0; i < 25; i++)
-                            {
-                                my += this.Controls["B" + i.ToString()].Tag;
-                            }
-
-
-
-
-
-
-                            byte[] K = Encoding.Default.GetBytes(my + ":" + "-1");
-                            Send("6" + my + ":" + "-1" + "|" + listBox1.SelectedItem);
-
-                        }
-                        break;
-                        //Txt_system_message.Text = "";
-                        //bool iwin = Chk(my);
-                        //bool youwin = Chk(A[0]);
-
-                        //if (!iwin && !youwin)
-                        //{
-                        //    if (A[1] != "-1")
-                        //    {
-                               
-                        //        Txt_system_message.Text = "輪我下";
-                        //    }
-                        //    else
-                        //    {
-                               
-                        //        Txt_system_message.Text = "輪到對手下";
-                        //    }
-                        //}
-                        //else
-                        //{
-                            
-                        //    Txt_system_message.Text = "以分出勝負";
-
-                        //    if (iwin && youwin)
-                        //    {
-                        //        Txt_system_message.Text = "平手";
-                        //    }
-                        //    else if (youwin)
-                        //    {
-                        //        Txt_system_message.Text = "你輸了";
-                        //    }
-                        //    else if (iwin)
-                        //    {
-                        //        Txt_system_message.Text = "你贏了";
-                        //    }
-                        //    listBox1.Enabled = true;
-                            
-                        //    btn_in_user.Enabled = true;
-                        //}
-
-
-                        //break;
+                   
                     case "D":
                         Txt_system_message.Text = Str;
                         MessageBox.Show("使用者名稱重複了");
@@ -350,6 +245,7 @@ namespace CardGame
 
                         }
                         break;
+
 
 
                 }

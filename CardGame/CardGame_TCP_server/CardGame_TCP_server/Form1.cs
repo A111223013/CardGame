@@ -104,6 +104,8 @@ namespace CardGame_TCP_server
                         case "1":                       //使用者傳送訊息給所有人
                             SendAll(Msg);               //廣播訊息
                             break;
+
+                       
                         default:                        //使用者傳送私密訊息
                             string[] C = Str.Split('|');//切開訊息與收件者
                             SendTo(Cmd + C[0], C[1]);   //C[0]是訊息，C[1]是收件者
@@ -118,11 +120,13 @@ namespace CardGame_TCP_server
         }
         private void SendTo(string Str, string User)
         {
+            byte[] B = Encoding.Default.GetBytes(Str);
+            Socket Sck = (Socket)HT[User];
+
             listBox2.Items.Add("(傳送)" + Str + ":" + User);
-            byte[] B = Encoding.Default.GetBytes(Str);  //訊息轉譯為byte陣列
-            Socket Sck = (Socket)HT[User];              //取出發送對象User的通訊物件
-            Sck.Send(B, 0, B.Length, SocketFlags.None); //發送訊息
+            Sck.Send(B, 0, B.Length, SocketFlags.None);
         }
+
         //傳送訊息給所有的線上客戶
         private void SendAll(string Str)
         {
@@ -155,5 +159,7 @@ namespace CardGame_TCP_server
         {
             textBox1.Text = MyIP();
         }
+       
+
     }
 }
