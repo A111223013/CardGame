@@ -20,6 +20,7 @@ namespace CardGame
     {
         public event Action<string> OnDataSent;
         public event Action<string> OnCardSent;
+        public event Action<string> OnCardSkillSent;
         private Form2 form2;
         private Thread Th; // 监听线程
         private bool connected = false; // 是否连接到服务器
@@ -50,10 +51,21 @@ namespace CardGame
         public Form1()
         {
             InitializeComponent();
+            this.turn = turn;
+
+            // 根據先後手值設置遊戲狀態
+            if (turn == 1)
+            {
+                MessageBox.Show("你是先攻！");
+            }
+            else
+            {
+                MessageBox.Show("你是後攻！");
+            }
         }
 
 
-        private void y_value() //隊友的資料OnMonsterSent
+        private void y_value() //
         {
 
             OnDataSent?.Invoke(mHealth + "," + mShield + "," + mEnergy ); // 觸發事件
@@ -134,10 +146,11 @@ namespace CardGame
         // 加载时初始化界面
         private void Form1_Load(object sender, EventArgs e)
         {
-            label15.Text = $"對手：{OpponentName}";
+            label15.Text = $"{OpponentName}";
             currentHand = DrawRandomCards(5);
             LoadCards();
             UpdateStatusUI();
+
         }
 
 
@@ -340,36 +353,11 @@ namespace CardGame
             }
         }
 
-        // 监听服务器消息
-        private void Listen()
+        private void CardskillSent(string str) //隊友的資料OnMonsterSent OnMonsterSentDead OnMSkillSent OnReStartSent;
         {
-            EndPoint ServerEP = (EndPoint)T.RemoteEndPoint;
-            byte[] B = new byte[1023];
-            int inLen = 0;
-            string MSG;
-            string St;
-            string Str;
-            while (true) // 使用 connected 控制迴圈
-            {
-                try
-                {
 
-                    inLen = T.ReceiveFrom(B, ref ServerEP);
-                }
-                catch (Exception)
-                {
-                   
-                }
-                MSG = Encoding.Default.GetString(B, 0, inLen);
-                St = MSG.Substring(0, 1);
-                Str = MSG.Substring(1);
-                switch (St)
-                {
-                    
-                }
-            }
+            OnCardSkillSent?.Invoke(str); // 觸發事件
         }
-        
 
         private void button1_Click(object sender, EventArgs e)
         {

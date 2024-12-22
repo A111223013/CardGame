@@ -21,6 +21,7 @@ namespace CardGame
         public Form2()
         {
             InitializeComponent();
+            Turn = -1; // 默認值，表示未決定
         }
         //公用變數
         Socket T;                                          //通訊物件
@@ -43,7 +44,10 @@ namespace CardGame
             Form1 form1 = new Form1();  // 創建 Form1
             form1.OnDataSent += test_send;
             form1.OnCardSent += card_send;// 實例
+            form1.OpponentName = listBox1.SelectedItem?.ToString(); // 設置對手名稱
+            form1.OnCardSkillSent += CardSkill;
             form1.Updata_game();
+            Send($"START|{User}|{form1.OpponentName}");
             form1.Show();                // 顯示 Form1
             this.Hide();                 // 隱藏當前的 Form (例如: Form2)
         }
@@ -59,6 +63,8 @@ namespace CardGame
         private void btn_start_Click(object sender, EventArgs e)
         {
             form1.send_server_Message = "伺服器ip" + textBox2.Text + "\n 伺服器port" + textBox1.Text + "\n玩家名稱" + Txt_username.Text;
+            form1.OpponentName = Txt_username.Text;
+
             Control.CheckForIllegalCrossThreadCalls = false;
             User = Txt_username.Text;
             if (string.IsNullOrWhiteSpace(User))
@@ -112,8 +118,10 @@ namespace CardGame
         public void card_send(string cmd)
         {
             Send("M" + cmd + "|" + listBox1.SelectedItem);
-
-
+        }
+        public void CardSkill(string cmd)
+        {
+            Send("S" + cmd + "|" + listBox1.SelectedItem);
         }
         private void Form2_Load(object sender, EventArgs e)
         {
