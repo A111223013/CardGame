@@ -21,7 +21,6 @@ namespace CardGame
         public event Action<string> OnDataSent;
         public event Action<string> OnCardSent;
         public event Action<string> OnCardSkillSent;
-        public bool IsPlayerTurn { get; set; } // 是否轮到玩家操作
         private Form2 form2;
         private Thread Th; // 监听线程
         private bool connected = false; // 是否连接到服务器
@@ -61,10 +60,10 @@ namespace CardGame
 
             OnDataSent?.Invoke(mHealth + "," + mShield + "," + mEnergy ); // 觸發事件
         }
-        private void card_value() //隊友的資料OnMonsterSent OnMonsterSentDead
+        private void card_value(string card_name, int card_attact, int card_def, int card_health) //隊友的資料OnMonsterSent OnMonsterSentDead
         {
 
-            OnCardSent?.Invoke(card_name + "," + card_attact + "," + card_def+","+card_health); // 觸發事件
+            OnCardSent?.Invoke(card_name + "," + card_attact + "," + card_def + "," + card_health); // 觸發事件
         }
         public void Updata_game()
         {
@@ -141,49 +140,12 @@ namespace CardGame
             currentHand = DrawRandomCards(5);
             LoadCards();
             UpdateStatusUI();
-            UpdateTurnUI(); // 根据 IsPlayerTurn 设置界面状态
+            
         }
 
 
-        // 根据玩家先后手状态更新界面
-        private void UpdateTurnUI()
-        {
-            if (IsPlayerTurn)
-            {
-                label19.Text = "你的回合，請操作！";
-                EnableGameControls();
-            }
-            else
-            {
-                label19.Text = "等待对方操作...";
-                DisableGameControls();
-            }
-        }
-        private void EnableGameControls()
-        {
-            button1.Enabled = true;
-            foreach (Control ctrl in Controls)
-            {
-                if (ctrl is PictureBox)
-                {
-                    ctrl.Enabled = true;
-                }
-            }
-        }
-
-        // 禁用操作控件
-        private void DisableGameControls()
-        {
-            button1.Enabled = false;
-            foreach (Control ctrl in Controls)
-            {
-                if (ctrl is PictureBox)
-                {
-                    ctrl.Enabled = false;
-                }
-            }
-        }
-
+        
+        
         // 随机抽取卡牌
         private List<Card> DrawRandomCards(int count)
         {
@@ -293,7 +255,7 @@ namespace CardGame
         }
 
         // 更新界面状态
-        private void UpdateStatusUI()
+        public void UpdateStatusUI()
         {
             label13.Text = mHealth.ToString();
             label14.Text = mEnergy.ToString();
@@ -306,7 +268,8 @@ namespace CardGame
         private void SendCardEffectToServer(Card card)
         {
             string message = $"EFFECT|{card.Name},{card.EnergyCost},{card.Damage}";
-            SendMessageToServer(message);
+            card_value(card.Name, card.EnergyCost, card.Damage, 0);
+            //SendMessageToServer(message);
             LogToListBox2($"[SEND] 发送卡牌效果: {message}");
         }
 
@@ -315,12 +278,12 @@ namespace CardGame
             try
             {
                 // 检查 Socket 是否已初始化并连接
-                if (T == null || !T.Connected)
-                {
-                    LogToListBox2("[ERROR] 发送消息失败：Socket 未连接。");
-                    MessageBox.Show("无法连接到服务器，消息发送失败。");
-                    return;
-                }
+               // if (T == null || !T.Connected)
+                //{
+                  //  LogToListBox2("[ERROR] 发送消息失败：Socket 未连接。");
+                   // MessageBox.Show("无法连接到服务器，消息发送失败。");
+                    //return;
+                //}
 
                 byte[] messageBytes = Encoding.Default.GetBytes(message);
                 T.Send(messageBytes, 0, messageBytes.Length, SocketFlags.None);

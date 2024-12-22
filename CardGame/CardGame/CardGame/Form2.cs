@@ -40,9 +40,15 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string message = $"W|{Txt_username.Text.Trim()}"; // 發送玩家名稱請求
-            Send(message);
-            StartGame(isPlayerTurn: true);
+            Form1 form1 = new Form1();  // 創建 Form1
+            form1.OnDataSent += test_send;
+            form1.OnCardSent += card_send;// 實例
+            form1.OpponentName = listBox1.SelectedItem?.ToString(); // 設置對手名稱
+            form1.OnCardSkillSent += CardSkill;
+            form1.Updata_game();
+            Send($"START|{User}|{form1.OpponentName}");
+            form1.Show();                // 顯示 Form1
+            this.Hide();                 // 隱藏當前的 Form (例如: Form2)
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -115,6 +121,10 @@ namespace CardGame
         public void CardSkill(string cmd)
         {
             Send("S" + cmd + "|" + listBox1.SelectedItem);
+        }
+        public void isPlayerTurn(string cmd)
+        {
+            Send("F" +  cmd + "|" + listBox1.SelectedItem);
         }
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -247,64 +257,19 @@ namespace CardGame
                         }
                         break;
 
-                    case "W":
-                        string[] A = Str.Split('|');
-                        string status = A[0];             // "OK" 或 "FAIL"
-                        string playerName = A.Length > 1 ? A[1] : ""; // 提取玩家名稱
+                    case "M":
+                        string[] C = Str.Split(',');
+                        MessageBox.Show("st:" + St + "str" + Str + "A" + C[2] + C[3]); // 第一個 卡牌名稱0 第二個 卡牌消耗1 第三個是 傷害2 第四個 不知道是啥3
 
-                        if (status == "OK")
-                        {
-                            MessageBox.Show($"成功連接伺服器！玩家：{playerName}");
-                            Invoke(new Action(() =>
-                            {
-                                MessageBox.Show("ok");
-                            }));
-                        }
-                        else if (status == "FAIL")
-                        {
-                            MessageBox.Show($"無法連接伺服器，請檢查玩家名稱：{playerName}");
-                            Invoke(new Action(() =>
-                            {
-                                MessageBox.Show("fail");
-                            }));
-                        }
+
+                        MessageBox.Show(form1.mHealth + " ");
+                        form1.UpdateStatusUI();
                         break;
+
 
                 }
             }
         }
-        private void StartGame(bool isPlayerTurn)
-        {
-            Form1 form1 = new Form1();  // 创建游戏界面
-            form1.OnDataSent += test_send;
-            form1.OnCardSent += card_send;  // 绑定事件
-            form1.OnCardSkillSent += CardSkill;
-            form1.IsPlayerTurn = isPlayerTurn;  // 设置玩家先后手状态
-            form1.OpponentName = listBox1.SelectedItem?.ToString();  // 设置对手名称
-
-            form1.Updata_game();
-            form1.Show();  // 显示游戏界面
-            this.Hide();   // 隐藏当前登录界面
-        }
-        private void HandleTurnMessage(string turnPlayer)
-        {
-            // 确保 turnPlayer 和本地用户名比较正确
-            if (turnPlayer.Trim() == Txt_username.Text.Trim())
-            {
-                // 玩家是先手
-                Invoke(new Action(() =>
-                {
-                    StartGame(isPlayerTurn: true); // 启动游戏界面，并设置为先手
-                }));
-            }
-            else
-            {
-                // 玩家是后手
-                Invoke(new Action(() =>
-                {
-                    StartGame(isPlayerTurn: false); // 启动游戏界面，并设置为后手
-                }));
-            }
-        }
+        
     }
 }
