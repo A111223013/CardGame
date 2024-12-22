@@ -70,3 +70,4 @@ D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.GenerateResourc
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.csproj.CoreCompileInputs.cache
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.exe
 D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.pdb
+D:\CardGame\CardGame\CardGame\CardGame\obj\Debug\CardGame.Form4.resources

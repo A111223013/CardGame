@@ -11,12 +11,20 @@
       "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|D:\\CardGame\\CardGame\\CardGame\\cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|d:\\cardgame\\cardgame\\cardgame\\cardgame\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|d:\\cardgame\\cardgame\\cardgame\\cardgame\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|D:\\CardGame\\CardGame\\CardGame\\cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|D:\\CardGame\\CardGame\\CardGame\\cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|solutionrelative:cardgame\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C7DC9EA6-9D3A-4684-8CE0-A8E8F52E9173}|CardGame\\CardGame.csproj|D:\\CardGame\\CardGame\\CardGame\\cardgame\\form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +42,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 158,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form4.cs",
+              "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form4.cs",
+              "RelativeDocumentMoniker": "CardGame\\Form4.cs",
+              "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form4.cs",
+              "RelativeToolTip": "CardGame\\Form4.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T07:47:41.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form4.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form4.cs",
+              "RelativeDocumentMoniker": "CardGame\\Form4.cs",
+              "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form4.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "CardGame\\Form4.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T07:46:51.932Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
             },
             {
               "$type": "Document",
@@ -60,37 +93,39 @@
               "RelativeDocumentMoniker": "CardGame\\Form1.cs",
               "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form1.cs",
               "RelativeToolTip": "CardGame\\Form1.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAgwEMAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAANgAAAAAAAAAAAAiwOQAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T02:49:50.005Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Form2.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form2.cs",
               "RelativeDocumentMoniker": "CardGame\\Form2.cs",
               "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form2.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "CardGame\\Form2.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T05:57:09.062Z"
+              "WhenOpened": "2024-12-20T05:57:09.062Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Form2.cs",
               "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form2.cs",
               "RelativeDocumentMoniker": "CardGame\\Form2.cs",
               "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form2.cs",
               "RelativeToolTip": "CardGame\\Form2.cs",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAqwDAAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwC8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T03:12:33.987Z"
+              "WhenOpened": "2024-12-09T03:12:33.987Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Form3.cs",
               "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form3.cs",
               "RelativeDocumentMoniker": "CardGame\\Form3.cs",
@@ -98,18 +133,20 @@
               "RelativeToolTip": "CardGame\\Form3.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T03:19:10.219Z"
+              "WhenOpened": "2024-12-09T03:19:10.219Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Form3.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form3.cs",
               "RelativeDocumentMoniker": "CardGame\\Form3.cs",
               "ToolTip": "D:\\CardGame\\CardGame\\CardGame\\CardGame\\Form3.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "CardGame\\Form3.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T03:10:32.423Z"
+              "WhenOpened": "2024-12-09T03:10:32.423Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
             }
           ]
         },

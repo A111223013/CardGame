@@ -38,9 +38,14 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();  // 創建 Form1 實例
-            form1.Show();                // 顯示 Form1
-            this.Hide();                 // 隱藏當前的 Form (例如: Form2)
+            Form4 form4 = new Form4();
+            if (form4.ShowDialog() == DialogResult.OK) // 等待 Form4 返回結果
+            {
+                int turn = form4.Turn; // 獲取先後手值
+                Form1 form1 = new Form1(turn); // 將先後手值傳遞給 Form1 的構造函數
+                form1.Show(); // 顯示 Form1
+                this.Hide(); // 隱藏當前的 Form2
+            }
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)

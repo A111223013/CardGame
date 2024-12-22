@@ -21,12 +21,23 @@ namespace CardGame
         Socket T;
         string User;
         bool ive = false;
-
+        private int turn;
         string my;
 
-        public Form1()
+        public Form1(int turn)
         {
             InitializeComponent();
+            this.turn = turn;
+
+            // 根據先後手值設置遊戲狀態
+            if (turn == 1)
+            {
+                MessageBox.Show("你是先攻！");
+            }
+            else
+            {
+                MessageBox.Show("你是後攻！");
+            }
         }
         int shield = 10;
         int heart = 20;
@@ -39,6 +50,8 @@ namespace CardGame
         private Random random = new Random();
         private bool isPlayerTurn = true; // 預設玩家回合
                                           // 玩家類別與主要屬性
+
+
         public class Player
         {
             public int Health { get; set; } = 20;
@@ -399,6 +412,15 @@ namespace CardGame
                 // 切換到結果頁面
                 this.Hide(); // 隱藏當前頁面
                 resultPage.Show(); // 顯示結果頁面
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form2 form2 = Application.OpenForms["Form2"] as Form2; // 獲取已存在的 Form2 實例
+            if (form2 != null)
+            {
+                form2.Show(); // 顯示 Form2
             }
         }
     }
