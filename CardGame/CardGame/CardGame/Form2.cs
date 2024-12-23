@@ -45,6 +45,7 @@ namespace CardGame
             form1.OnCardSent += card_send;// 實例
             form1.OpponentName = listBox1.SelectedItem?.ToString(); // 設置對手名稱
             form1.OnCardSkillSent += CardSkill;
+            form1.ParentForm = this;  // 设置 Form2 为 ParentForm
             form1.Updata_game();
             Send($"START|{User}|{form1.OpponentName}");
             form1.Show();                // 顯示 Form1
@@ -96,13 +97,13 @@ namespace CardGame
             catch (Exception)
             {
                 Txt_system_message.Text = "無法連線上伺服器" + "\r\n;";
-
+                btn_start.Enabled = true;
             }
             btn_in_user.Enabled = true;
             btn_start.Enabled = false;
 
         }
-        private void Send(string Str)
+        public void Send(string Str)
         {
 
             byte[] B = Encoding.Default.GetBytes(Str);
@@ -118,14 +119,12 @@ namespace CardGame
         {
             Send("M" + cmd + "|" + listBox1.SelectedItem);
         }
+        
         public void CardSkill(string cmd)
         {
             Send("S" + cmd + "|" + listBox1.SelectedItem);
         }
-        public void isPlayerTurn(string cmd)
-        {
-            Send("F" +  cmd + "|" + listBox1.SelectedItem);
-        }
+        
         private void Form2_Load(object sender, EventArgs e)
         {
             this.Text += " " + MyIP(); // 顯示本機 IP
@@ -265,6 +264,20 @@ namespace CardGame
                         MessageBox.Show(form1.mHealth + " ");
                         form1.UpdateStatusUI();
                         break;
+
+                    case "TURN": // 处理测试消息
+                        {
+                            string[] testDetails = Str.Split('|');
+                            if (testDetails.Length > 1)
+                            {
+                                string receivedMessage = testDetails[1]; // 提取消息内容
+                                Invoke(new Action(() =>
+                                {
+                                    MessageBox.Show($"接收到消息: {receivedMessage}");
+                                }));
+                            }
+                            break;
+                        }
 
 
                 }

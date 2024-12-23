@@ -109,7 +109,10 @@ namespace CardGame_TCP_server
                             SendAll(Msg);               //廣播訊息
                             break;
 
-                       
+
+                      
+
+
 
                         default:                        //使用者傳送私密訊息
                             string[] C = Str.Split('|');//切開訊息與收件者
