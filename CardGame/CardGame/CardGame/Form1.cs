@@ -21,6 +21,7 @@ namespace CardGame
         public event Action<string> OnDataSent;
         public event Action<string> OnCardSent;
         public event Action<string> OnCardSkillSent;
+        public event Action<string> OnCardEffect;
         private Form2 form2;
         private Thread Th; // 监听线程
         private bool connected = false; // 是否连接到服务器
@@ -28,14 +29,16 @@ namespace CardGame
         private Random random = new Random(); // 随机数生成器
         private string User; // 当前用户
         public string OpponentName { get; set; }
+        public string nextone;
+        public Form2 ParentForm { get; set; } // 引用 Form2 的实例
         // 玩家和对手的状态
         public string send_server_Message { get; set; }
         public int eHealth { get; set; } = 20;
-        public int eEnergy { get; set; } = 7;
+        public int eEnergy { get; set; } = 5;
         public int eShield { get; set; } = 10;
 
         public int mHealth { get; set; } = 20;
-        public int mEnergy { get; set; } = 7;
+        public int mEnergy { get; set; } = 5;
         public int mShield { get; set; } = 10;
         //伺服器設定
         public int server_port;
@@ -65,9 +68,22 @@ namespace CardGame
 
             OnCardSent?.Invoke(card_name + "," + card_attact + "," + card_def + "," + card_health); // 觸發事件
         }
+        private void card_effect(string card_name, int card_cost, int card_attact, int card_def, int card_health)
+        {
+            OnCardEffect?.Invoke(card_name + "," + card_cost + "," + card_attact + "," + card_def + "," + card_health);
+        }
         public void Updata_game()
         {
 
+        }
+        public class Card
+        {
+
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public int EnergyCost { get; set; }
+
+            public int Damage { get; set; }
         }
 
         // 卡牌名稱與描述
@@ -108,16 +124,7 @@ namespace CardGame
         };
 
         // 卡牌類別
-        public class Card
-        {
-
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public int EnergyCost { get; set; }
-
-            public int Damage { get; set; }
-        }
-
+       
         private readonly List<Card> cards = new List<Card>
         {
             new Card { Name = "丟石頭", Description = "造成2點傷害，能量消耗1", EnergyCost = 1, Damage = 2 },
@@ -224,24 +231,37 @@ namespace CardGame
         // 应用卡牌效果
         private void ApplyCardEffect(Card card)
         {
-            mEnergy -= card.EnergyCost;
+            mEnergy -= card.EnergyCost; // 消耗能量
 
-            if (card.Damage > 0)
+            if (card.Damage > 0) // 如果卡牌是攻击
             {
-                eHealth = Math.Max(0, eHealth - card.Damage); // 减少敌人血量
+                if (eShield > 0) // 目标有护甲
+                {
+                    int remainingDamage = card.Damage - eShield; // 计算剩余伤害
+                    eShield = Math.Max(0, eShield - card.Damage); // 减少护甲
+                    if (remainingDamage > 0) // 如果伤害超过护甲值
+                    {
+                        eHealth = Math.Max(0, eHealth - remainingDamage); // 减少剩余血量
+                    }
+                }
+                else // 目标无护甲
+                {
+                    eHealth = Math.Max(0, eHealth - card.Damage); // 直接减少血量
+                }
             }
-            else if (card.Damage < 0)
+            else if (card.Damage < 0) // 如果卡牌是治疗
             {
-                mHealth = Math.Min(20, mHealth - card.Damage); // 恢复自己血量
+                mHealth = Math.Min(20, mHealth - card.Damage); // 恢复自己血量，最多不超过 20
             }
 
+            // 特殊效果卡牌处理
             if (card.Name == "護甲")
             {
-                mShield += 2;
+                mShield += 2; // 增加护甲值
             }
             else if (card.Name == "九偉人之鎧")
             {
-                mShield += 10;
+                mShield += 10; // 增加大量护甲值
             }
             else if (card.Name == "蓄力")
             {
@@ -250,9 +270,10 @@ namespace CardGame
             }
             else if (card.Name == "龍之啟示")
             {
-                mEnergy += 1;
+                mEnergy += 1; // 增加能量
             }
         }
+
 
         // 更新界面状态
         public void UpdateStatusUI()
@@ -269,36 +290,14 @@ namespace CardGame
         {
             string message = $"EFFECT|{card.Name},{card.EnergyCost},{card.Damage}";
             card_value(card.Name, card.EnergyCost, card.Damage, 0);
+
+            
             //SendMessageToServer(message);
             LogToListBox2($"[SEND] 发送卡牌效果: {message}");
         }
 
-        private void SendMessageToServer(string message)
-        {
-            try
-            {
-                // 检查 Socket 是否已初始化并连接
-               // if (T == null || !T.Connected)
-                //{
-                  //  LogToListBox2("[ERROR] 发送消息失败：Socket 未连接。");
-                   // MessageBox.Show("无法连接到服务器，消息发送失败。");
-                    //return;
-                //}
-
-                byte[] messageBytes = Encoding.Default.GetBytes(message);
-                T.Send(messageBytes, 0, messageBytes.Length, SocketFlags.None);
-                LogToListBox2($"[SEND] 消息已发送：{message}");
-            }
-            catch (SocketException ex)
-            {
-                LogToListBox2($"[ERROR] 网络错误：{ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                LogToListBox2($"[ERROR] 发送消息失败：{ex.Message}");
-            }
-        }
-        private void ProcessOpponentEffect(string effectDetails)
+       
+        public void ProcessOpponentEffect(string effectDetails)
         {
             string[] parts = effectDetails.Split(',');
             string cardName = parts[0];
@@ -322,39 +321,50 @@ namespace CardGame
             }
         }
         // 发送状态更新到服务器
-        private void SendStatusUpdate()
-        {
-            string message = $"S{mHealth},{mShield},{mEnergy},{eHealth},{eShield},{eEnergy}";
-            Send(message);
-        }
-
-        // 发送消息到服务器
-        private void Send(string message)
-        {
-            try
-            {
-                byte[] buffer = Encoding.Default.GetBytes(message);
-                T.Send(buffer, 0, buffer.Length, SocketFlags.None);
-                listBox2.Items.Add($"[SEND] {message}");
-            }
-            catch (Exception ex)
-            {
-                listBox2.Items.Add($"[ERROR] 發送失敗：{ex.Message}");
-            }
-        }
-
-        private void CardskillSent(string str) //隊友的資料OnMonsterSent OnMonsterSentDead OnMSkillSent OnReStartSent;
-        {
-
-            OnCardSkillSent?.Invoke(str); // 觸發事件
-        }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
-            //結束回合輪到對手
-            
+            mEnergy = 7;
+
+            // 禁用操作控件
+            DisableGameControls();
+
+            // 显示等待提示
+            label19.Text = "等待对方操作...";
+
+        }
+        public void NextOne()
+        {
+            // 启用操作控件
+            EnableGameControls();
+
+            // 更新界面
+            label19.Text = "你的回合，請操作！";
         }
 
+        private void EnableGameControls()
+        {
+            button1.Enabled = true; // 允许点击按钮结束回合
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is PictureBox)
+                {
+                    ctrl.Enabled = true; // 启用卡牌点击操作
+                }
+            }
+        }
+
+        private void DisableGameControls()
+        {
+            button1.Enabled = false; // 禁用按钮
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is PictureBox)
+                {
+                    ctrl.Enabled = false; // 禁用卡牌点击操作
+                }
+            }
+        }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             
@@ -362,8 +372,13 @@ namespace CardGame
             { T.Close(); }
             Application.Exit();  // 關閉整個應用程式    
         }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         // 在控件动态调整或添加后调用
-        
+
 
     }
 }
