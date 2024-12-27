@@ -57,6 +57,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.label6 = new System.Windows.Forms.Label();
+            this.label_hp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -245,7 +246,6 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(259, 316);
             this.listBox2.TabIndex = 85;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -339,11 +339,22 @@
             this.label6.TabIndex = 94;
             this.label6.Text = "label6";
             // 
+            // label_hp
+            // 
+            this.label_hp.AutoSize = true;
+            this.label_hp.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_hp.Location = new System.Drawing.Point(932, 405);
+            this.label_hp.Name = "label_hp";
+            this.label_hp.Size = new System.Drawing.Size(58, 21);
+            this.label_hp.TabIndex = 95;
+            this.label_hp.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 717);
+            this.ClientSize = new System.Drawing.Size(1283, 700);
+            this.Controls.Add(this.label_hp);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label24);
@@ -417,6 +428,7 @@
         private System.Windows.Forms.Label label25;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_hp;
     }
 }
 

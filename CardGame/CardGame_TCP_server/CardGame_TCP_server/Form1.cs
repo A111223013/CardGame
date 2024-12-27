@@ -24,6 +24,8 @@ namespace CardGame_TCP_server
         Hashtable HT = new Hashtable(); //客戶名稱與通訊物件的集合(雜湊表)(key:Name, Socket)
         private static Dictionary<string, Socket> players = new Dictionary<string, Socket>();
         private static Random random = new Random();
+        private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
+
         public Form1()
         {
             InitializeComponent();
@@ -69,7 +71,7 @@ namespace CardGame_TCP_server
         {
             Socket Sck = Client; //複製Client通訊物件到個別客戶專用物件Sck
             Thread Th = Th_Clt;  //複製執行緒Th_Clt到區域變數Th
-            string username = ""; // 儲存玩家名稱
+           
             while (true)         //持續監聽客戶傳來的訊息
             {
                 try                //用 Sck 來接收此客戶訊息，inLen 是接收訊息的 byte 數目

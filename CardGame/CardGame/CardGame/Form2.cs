@@ -21,14 +21,16 @@ namespace CardGame
         public Form2()
         {
             InitializeComponent();
+            //Turn = -1; // 默認值，表示未決定
         }
         //公用變數
         Socket T;                                          //通訊物件
         Thread Th;                                         //網路監聽執行緒
         string User;    //使用者
-        string my;
+        string my;    
         Form1 form1 = new Form1();
         private string send_sever_message;
+        public bool IsPlayerTurn; // 是否是玩家回合
         private string MyIP()
         {
             string hn = Dns.GetHostName();
@@ -40,12 +42,14 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();  // 創建 Form1
+            // 隨機決定先後手
+            
+
             form1.OnDataSent += test_send;
             form1.OnCardSent += card_send;// 實例
             form1.OpponentName = listBox1.SelectedItem?.ToString(); // 設置對手名稱
             form1.OnCardSkillSent += CardSkill;
-            form1.ParentForm = this;  // 设置 Form2 为 ParentForm
+            form1.OnTurnSent += turn_send;
             form1.Updata_game();
             Send($"START|{User}|{form1.OpponentName}");
             form1.Show();                // 顯示 Form1
@@ -119,12 +123,14 @@ namespace CardGame
         {
             Send("M" + cmd + "|" + listBox1.SelectedItem);
         }
-        
         public void CardSkill(string cmd)
         {
             Send("S" + cmd + "|" + listBox1.SelectedItem);
         }
-        
+        public void turn_send(string cmd)
+        { 
+            Send("TURNEND"+cmd+"|"+listBox1.SelectedItem);
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
             this.Text += " " + MyIP(); // 顯示本機 IP
@@ -137,7 +143,7 @@ namespace CardGame
             {
                 if (listBox1.SelectedItem.ToString() != User)
                 {
-
+                    
                     Send("I" + User + "," + listBox1.Text + "|" + listBox1.SelectedItem);
                 }
                 else
@@ -180,19 +186,79 @@ namespace CardGame
                 Str = MSG.Substring(1);
                 switch (St)
                 {
+                    case "M":
+                        string[] C = Str.Split(',');
+                        MessageBox.Show("st:" + St + "str" + Str + "A" + C[2] + C[3]); // 第一個 卡牌名稱0 第二個 卡牌消耗1 第三個是 傷害2 第四個 不知道是啥3
+                        if (form1.mShield > int.Parse(C[2]))
+                        {
+                            form1.mShield -= int.Parse(C[2]);
+                        }
+                        else if (form1.mShield < int.Parse(C[2]))
+                            {
+                                int damage = int.Parse(C[2]) - form1.mShield;
+                                form1.mHealth -= damage;
+                            }
+                            
+                        MessageBox.Show(form1.mHealth + " ");
+                        form1.ListboxUpdata(form1.mHealth + Str);
+                        form1.UpdateStatusUI();
+                        break;
+
+                    case "TURNEND":
+                        try
+                        {
+                            string[] parts = Str.Split('|');
+                            if (parts.Length < 2)
+                            {
+                                MessageBox.Show("[ERROR] 消息格式错误: " + Str);
+                                return;
+                            }
+
+
+                            string receiver = parts[1];
+
+                            MessageBox.Show($"接收到 TURNEND 消息: , 接收者 {receiver}");
+
+                            if (receiver == User) // 确保是发给自己的消息
+                            {
+                                IsPlayerTurn = true;
+                                form1.mEnergy = form1.MaxEnergy;
+                                MessageBox.Show("现在是你的回合！");
+
+                                Invoke(new Action(() =>
+                                {
+                                    button1.Enabled = true;
+                                    foreach (Control control in Controls)
+                                    {
+                                        if (control is PictureBox || control is Button)
+                                        {
+                                            control.Enabled = true;
+                                        }
+                                    }
+                                }));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("[ERROR] 处理 TURNEND 消息时出错: " + ex.Message);
+                        }
+                        break;
+
+
+
                     case "L":
                         listBox1.Items.Clear();
                         string[] M = Str.Split(',');
                         for (int i = 0; i < M.Length; i++) listBox1.Items.Add(M[i]);
                         break;
                     case "5":
-                        DialogResult result = MessageBox.Show("是排遊玩卡牌對戰", "重玩訊息", MessageBoxButtons.YesNo);
+                        DialogResult result = MessageBox.Show("是排遊玩卡牌對戰" , "重玩訊息", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes)
                         {
                             listBox1.Text = Str;
                             listBox1.Enabled = false;
                             Send("P" + "Y" + "|" + listBox1.SelectedItem);
-
+                        
                         }
                         else
                         {
@@ -208,13 +274,13 @@ namespace CardGame
                         }
                         else
                         {
-
+                            
                             MessageBox.Show("抱歉" + listBox1.SelectedItem.ToString() + "覺得你太爛!");
                         }
 
 
                         break;
-
+                   
                     case "D":
                         Txt_system_message.Text = Str;
                         MessageBox.Show("使用者名稱重複了");
@@ -225,6 +291,7 @@ namespace CardGame
                         break;
                     case "I":
                         string[] F = Str.Split(',');
+
                         DialogResult res = MessageBox.Show(F[0] + "邀請和你卡牌對戰是否接受", "邀請訊息", MessageBoxButtons.YesNo);
                         if (res == DialogResult.Yes)
                         {
@@ -256,33 +323,10 @@ namespace CardGame
                         }
                         break;
 
-                    case "M":
-                        string[] C = Str.Split(',');
-                        MessageBox.Show("st:" + St + "str" + Str + "A" + C[2] + C[3]); // 第一個 卡牌名稱0 第二個 卡牌消耗1 第三個是 傷害2 第四個 不知道是啥3
-
-
-                        MessageBox.Show(form1.mHealth + " ");
-                        form1.UpdateStatusUI();
-                        break;
-
-                    case "TURN": // 处理测试消息
-                        {
-                            string[] testDetails = Str.Split('|');
-                            if (testDetails.Length > 1)
-                            {
-                                string receivedMessage = testDetails[1]; // 提取消息内容
-                                Invoke(new Action(() =>
-                                {
-                                    MessageBox.Show($"接收到消息: {receivedMessage}");
-                                }));
-                            }
-                            break;
-                        }
 
 
                 }
             }
         }
-        
     }
 }
