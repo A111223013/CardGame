@@ -56,6 +56,7 @@ namespace CardGame_TCP_server
         private void ServerSub()
         {
             //Server IP 和 Port
+            
             IPEndPoint EP = new IPEndPoint(IPAddress.Parse(textBox1.Text), int.Parse(textBox2.Text));
             Server = new TcpListener(EP);       //建立伺服端監聽器(總機)
             Server.Start(100);                  //啟動監聽設定允許最多連線數100人

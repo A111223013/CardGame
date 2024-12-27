@@ -55,7 +55,7 @@ namespace CardGame
         public int card_health { get; set; }
 
         private List<Card> currentHand; // 当前手牌
-        private bool isPlayerTurn = true; // 默认是玩家回合
+       
         public Form1()
         {
             InitializeComponent();
@@ -82,14 +82,14 @@ namespace CardGame
 
             OnDataSent?.Invoke(mHealth + "," + mShield + "," + mEnergy ); // 觸發事件
         }
-        private void card_value(string card_name, int card_attact, int card_def, int card_health)
+        private void card_value(string card_name, int card_attact, int card_def, int card_health, int mEnergy, int mHealth, int mShield)
         {
 
-            OnCardSent?.Invoke(card_name + "," + card_attact + "," + card_def + "," + card_health); // 觸發事件
+            OnCardSent?.Invoke(card_name + "," + card_attact + "," + card_def + "," + card_health + ","+mEnergy + "," + mHealth + "," + mShield); // 觸發事件
         }
-        private void End_Turn(string isPlayerTurn) 
+        private void End_Turn() 
         {
-            OnTurnSent?.Invoke(isPlayerTurn);
+            OnTurnSent?.Invoke("T");
         }
         public void Updata_game()
         {
@@ -97,19 +97,19 @@ namespace CardGame
         }
 
         // 卡牌名稱與描述
-        private readonly string[] cardNames = { "丟石頭", "斬擊", "星爆氣流斬", "破甲", "蓄力",
+        private readonly string[] cardNames = { "丟石頭", "斬擊", "星爆氣流斬", "破甲",
             "治癒", "高級治癒", "龍之啟示", "護甲", "九偉人之鎧",
             "丟石頭", "丟石頭", "丟石頭", "斬擊", "斬擊",
             "治癒", "治癒", "治癒", "護甲", "護甲",
-            "護甲", "蓄力", "蓄力", "破甲", "我就是力量的花生",
+            "護甲", "破甲", "我就是力量的花生",
             "龍之啟示" };
         private readonly string[] cardDescriptions =
         {
             "丟石頭 - 消耗1點能量，對敵方造成2點傷害。",
             "斬擊 - 消耗2點能量，對敵方造成3點傷害。",
             "星爆氣流斬 - 消耗5點能量，造成7點傷害。",
-            "破甲 - 消耗3點能量，無視護甲造成4點傷害。",
-            "蓄力 - 消耗2點能量，下次攻擊傷害提高3。",
+            "破甲 - 消耗3點能量，造成4點傷害。",
+            
             "治癒 - 消耗1點能量，恢復2點血量。",
             "高級治癒 - 消耗5點能量，恢復10點血量。",
             "龍之啟示 - 消耗2點能量，能量最大值+1。",
@@ -126,9 +126,8 @@ namespace CardGame
             "護甲 - 消耗1點能量，增加2點護甲。",
             "護甲 - 消耗1點能量，增加2點護甲。",
             "護甲 - 消耗1點能量，增加2點護甲。",
-            "蓄力 - 消耗2點能量，下次攻擊傷害提高3。",
-            "蓄力 - 消耗2點能量，下次攻擊傷害提高3。",
-            "破甲 - 消耗3點能量，無視護甲造成4點傷害。",
+            
+            "破甲 - 消耗3點能量，造成4點傷害。",
             "我就是力量的花生 - 消耗7點能量，造成15點傷害。",
             "龍之啟示 - 消耗2點能量，能量最大值+1。"
         };
@@ -153,8 +152,7 @@ namespace CardGame
             new Card { Name = "丟石頭", Description = "造成2點傷害，能量消耗1", EnergyCost = 1, Damage = 2 , Health= 0, Deffence = 0,Energy = 0},
             new Card { Name = "斬擊", Description = "造成3點傷害，能量消耗2", EnergyCost = 2, Damage = 3 , Health= 0, Deffence = 0,Energy = 0},
             new Card { Name = "星爆氣流斬", Description = "造成7點傷害，能量消耗5", EnergyCost = 5, Damage = 7 , Health= 0, Deffence = 0,Energy = 0},
-            new Card { Name = "破甲", Description = "無視護甲造成4點傷害，能量消耗3", EnergyCost = 3, Damage = 4 , Health= 0, Deffence = 0, Energy = 0},
-            new Card {Name = "蓄力", Description = "下次攻擊傷害提高3，能量消耗2", EnergyCost = 2, Damage = 0, Health = 0, Deffence = 0,Energy = 0},
+            new Card { Name = "破甲", Description = "造成4點傷害，能量消耗3", EnergyCost = 3, Damage = 4 , Health= 0, Deffence = 0, Energy = 0},
             new Card { Name = "治癒", Description = "回復2點血量，能量消耗1", EnergyCost = 1, Damage = 0, Health= 2, Deffence = 0,Energy = 0 },
             new Card { Name = "高級治癒", Description = "回復10點血量，能量消耗5", EnergyCost = 5, Damage = 0, Health= 10, Deffence = 0,Energy = 0 },
             new Card { Name = "龍之啟示", Description = "能量最大值+1，能量消耗2", EnergyCost = 2, Damage = 0 , Health= 0, Deffence = 0, Energy = 1},
@@ -280,27 +278,41 @@ namespace CardGame
         // 应用卡牌效果
         private void ApplyCardEffect(Card card)
         {
-            mEnergy -= card.EnergyCost;
-
-            
+            mEnergy -= card.EnergyCost; // 扣除卡牌的能量消耗
 
             if (card.Name == "護甲")
             {
-                mShield += 2;
+                mShield += 2; // 增加護甲
             }
             else if (card.Name == "九偉人之鎧")
             {
-                mShield += 10;
+                mShield += 10; // 增加大量護甲
             }
-            else if (card.Name == "蓄力")
+            else if (card.Name == "丟石頭" || card.Name == "斬擊" || card.Name == "星爆氣流斬"|| card.Name == "破甲" || card.Name == "我就是力量的花生")
             {
-                // 蓄力效果：下次攻击加成
-                // 实现逻辑略
+                int damage = card.Damage; // 根據卡牌定義的傷害值
+                if (eShield >= damage)
+                {
+                    eShield -= damage; // 優先扣除護盾
+                }
+                else
+                {
+                    int remainingDamage = damage - eShield;
+                    eShield = 0; // 把護盾扣為 0
+                    eHealth = eHealth - remainingDamage;
+                }
+            }
+            else if(card.Name == "治癒" || card.Name == "高級治癒")
+            {
+                mHealth += card.Health;
             }
             else if (card.Name == "龍之啟示")
             {
-                mEnergy += 1;
+                MaxEnergy += 1; // 增加最大能量值
+                mEnergy = Math.Min(MaxEnergy, mEnergy + 1); // 增加能量
             }
+
+
         }
 
         // 更新界面状态
@@ -320,18 +332,17 @@ namespace CardGame
        
         private void SendCardEffectToServer(Card card)
         {
-            string message = $"EFFECT|{card.Name},{card.EnergyCost},{card.Damage}";
-            card_value(card.Name, card.EnergyCost, card.Damage, 0);
+            string message = $"EFFECT|{card.Name},{card.EnergyCost},{card.Damage},{mEnergy},{mHealth},{mShield}";
+            card_value(card.Name, card.EnergyCost, card.Damage, 0,mEnergy,mHealth,mShield);
             //SendMessageToServer(message);
             LogToListBox2($"[SEND] 发送卡牌效果: {message}");
         }
-
+        
         private void SendTurnEndtoServer()
         {
-            
-            string receiver = label15.Text; // 对方用户名
-            string message = $"TURNEND|{receiver}";
-            End_Turn(User);
+
+            string message = $"TURNEND|";
+            End_Turn();
             LogToListBox2($"[SEND]回合結束:{message}");
         }
         
@@ -373,18 +384,20 @@ namespace CardGame
             if (!IsPlayerTurn) return; // 防止非法操作
 
             mEnergy = MaxEnergy; // 重置能量為最大值
-            User = label15.Text.ToString();
+            
             SendTurnEndtoServer();
-            button1.Enabled = false; // 禁用按鈕
+            
             SetControlsEnabled(false); // 禁用控件
             IsPlayerTurn = false; // 切換狀態
             label19.Text = "回合結束，等待對手操作...";
+            LoadCards();
 
         }
-        private void SetControlsEnabled(bool enabled)
+        public void SetControlsEnabled(bool enabled)
 
         {
             button1.Enabled = enabled; // 控制回合結束按鈕
+            pictureBox1.Enabled = enabled;
             foreach (Control control in Controls)
             {
                 if (control is PictureBox || control is Button)

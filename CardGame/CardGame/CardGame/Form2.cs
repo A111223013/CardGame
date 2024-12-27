@@ -129,7 +129,7 @@ namespace CardGame
         }
         public void turn_send(string cmd)
         { 
-            Send("TURNEND"+cmd+"|"+listBox1.SelectedItem);
+            Send(cmd+"|"+listBox1.SelectedItem);
         }
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -198,45 +198,25 @@ namespace CardGame
                                 int damage = int.Parse(C[2]) - form1.mShield;
                                 form1.mHealth -= damage;
                             }
-                            
+
+                        form1.eShield = int.Parse(C[6]);
+                        form1.eHealth = int.Parse(C[5]);
+                        form1.eEnergy = int.Parse(C[4]);
                         MessageBox.Show(form1.mHealth + " ");
                         form1.ListboxUpdata(form1.mHealth + Str);
                         form1.UpdateStatusUI();
                         break;
 
-                    case "TURNEND":
+                    case "T":
                         try
                         {
-                            string[] parts = Str.Split('|');
-                            if (parts.Length < 2)
-                            {
-                                MessageBox.Show("[ERROR] 消息格式错误: " + Str);
-                                return;
-                            }
+                            form1.ListboxUpdata("已收到回合結束");
+                            MessageBox.Show($"接收到 TURNEND 消息");
+                            form1.SetControlsEnabled(true);
+                            form1.IsPlayerTurn = true;
 
 
-                            string receiver = parts[1];
 
-                            MessageBox.Show($"接收到 TURNEND 消息: , 接收者 {receiver}");
-
-                            if (receiver == User) // 确保是发给自己的消息
-                            {
-                                IsPlayerTurn = true;
-                                form1.mEnergy = form1.MaxEnergy;
-                                MessageBox.Show("现在是你的回合！");
-
-                                Invoke(new Action(() =>
-                                {
-                                    button1.Enabled = true;
-                                    foreach (Control control in Controls)
-                                    {
-                                        if (control is PictureBox || control is Button)
-                                        {
-                                            control.Enabled = true;
-                                        }
-                                    }
-                                }));
-                            }
                         }
                         catch (Exception ex)
                         {
