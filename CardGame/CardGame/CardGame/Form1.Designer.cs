@@ -57,7 +57,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.label6 = new System.Windows.Forms.Label();
-            this.label_hp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -69,7 +68,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(40, 802);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(130, 153);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -79,7 +78,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(328, 802);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(130, 153);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -89,7 +88,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Location = new System.Drawing.Point(616, 802);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(130, 153);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -99,7 +98,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Location = new System.Drawing.Point(902, 802);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(130, 153);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -109,7 +108,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Location = new System.Drawing.Point(1190, 802);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(130, 153);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -193,7 +192,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(1514, 873);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(290, 148);
             this.button1.TabIndex = 79;
@@ -261,7 +260,7 @@
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 18;
             this.listBox2.Location = new System.Drawing.Point(1417, 88);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(4);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(463, 472);
             this.listBox2.TabIndex = 85;
@@ -365,23 +364,11 @@
             this.label6.TabIndex = 94;
             this.label6.Text = "label6";
             // 
-            // label_hp
-            // 
-            this.label_hp.AutoSize = true;
-            this.label_hp.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_hp.Location = new System.Drawing.Point(1398, 608);
-            this.label_hp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_hp.Name = "label_hp";
-            this.label_hp.Size = new System.Drawing.Size(86, 32);
-            this.label_hp.TabIndex = 95;
-            this.label_hp.Text = "label7";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
-            this.Controls.Add(this.label_hp);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label24);
@@ -410,7 +397,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -456,7 +443,6 @@
         private System.Windows.Forms.Label label25;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label_hp;
     }
 }
 

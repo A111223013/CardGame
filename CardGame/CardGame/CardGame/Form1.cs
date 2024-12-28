@@ -36,14 +36,14 @@ namespace CardGame
         // 玩家和对手的状态
         public string send_server_Message { get; set; }
 
-        public int MaxEnergy = 7 ; // 定義每回合的最大能量
+        public int MaxEnergy = 5 ; // 定義每回合的最大能量
 
         public int eHealth { get; set; } = 20;
-        public int eEnergy { get; set; } = 7;
+        public int eEnergy { get; set; } = 5;
         public int eShield { get; set; } = 10;
 
         public int mHealth { get; set; } = 20;
-        public int mEnergy { get; set; } = 7;
+        public int mEnergy { get; set; } = 5;
         public int mShield { get; set; } = 10;
         //伺服器設定
         public int server_port;
@@ -255,23 +255,24 @@ namespace CardGame
             listBox2.Items.Add("接收傳送的訊息: " + cmd);
 
             // 確保 eHealth 從 UI 控件中獲取正確值
-            if (int.TryParse(label16.Text, out int currentHealth))
-            {
-                eHealth = currentHealth;
-            }
-            else
-            {
-                MessageBox.Show("敵方血量數據無效！");
-            }
+            //if (int.TryParse(label16.Text, out int currentHealth))
+            //{
+              //  eHealth = currentHealth;
+            //}
+            //else
+            //{
+              //  MessageBox.Show("敵方血量數據無效！");
+            //}
             // 更新敵方數據
             string[] parts = cmd.Split(',');
             if (parts.Length >= 3 && int.TryParse(parts[0], out int health) && int.TryParse(parts[1], out int shield) && int.TryParse(parts[2], out int energy))
             {
-                eHealth = health;
-                eShield = shield;
+                label16.Text = parts[4];
+                label23.Text = parts[5];
                 eEnergy = energy;
             }
             UpdateStatusUI();
+            CheckHealth();
         }
 
 
@@ -312,13 +313,12 @@ namespace CardGame
                 mEnergy = Math.Min(MaxEnergy, mEnergy + 1); // 增加能量
             }
 
-
+            
         }
 
         // 更新界面状态
         public void UpdateStatusUI()
         {
-            MessageBox.Show(mHealth + "123");
             
             label13.Text = mHealth.ToString();
             label14.Text = mEnergy.ToString();
@@ -327,7 +327,7 @@ namespace CardGame
             label16.Text = eHealth.ToString();
             label17.Text = eEnergy.ToString();
             label23.Text = eShield.ToString();
-           
+            
         }
        
         private void SendCardEffectToServer(Card card)
@@ -390,6 +390,14 @@ namespace CardGame
             SetControlsEnabled(false); // 禁用控件
             IsPlayerTurn = false; // 切換狀態
             label19.Text = "回合結束，等待對手操作...";
+
+            // 清空現有手牌
+            currentHand.Clear();
+
+            // 抽取新手牌
+            currentHand = DrawRandomCards(5);
+
+            // 更新界面上的卡牌顯示
             LoadCards();
 
         }
@@ -413,9 +421,30 @@ namespace CardGame
             { T.Close(); }
             Application.Exit();  // 關閉整個應用程式    
         }
-        // 在控件动态调整或添加后调用
+        private void CheckHealth()
+        {
+            // 解析玩家血量和敵人血量
+            int playerHealth = int.Parse(label13.Text);
+            int enemyHealth = int.Parse(label16.Text);
+            if (playerHealth <= 0)
+            {
+                ShowGameResult("敵人獲勝！");
+            }
+            else if (enemyHealth <= 0)
+            {
+                ShowGameResult("玩家獲勝！");
+            }
+        }
 
-        
+        private void ShowGameResult(string result)
+        {
+            // 跳轉到 Form3 並傳遞結果
+            Form3 resultForm = new Form3(result);
+            resultForm.Show();
+            this.Hide(); // 隱藏當前表單
+        }
+
+
 
     }
 }

@@ -12,9 +12,10 @@ namespace CardGame
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        public Form3(string result)
         {
             InitializeComponent();
+            label19.Text = result; // 顯示結果
         }
 
         private void button1_Click(object sender, EventArgs e)

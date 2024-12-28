@@ -116,7 +116,7 @@ namespace CardGame
         public void test_send(string cmd)
         {
             string[] F = cmd.Split(',');
-            MessageBox.Show(F[0] + F[1]);
+           
             Send("T" + cmd + "|" + listBox1.SelectedItem);
         }
         public void card_send(string cmd)
@@ -188,21 +188,26 @@ namespace CardGame
                 {
                     case "M":
                         string[] C = Str.Split(',');
-                        MessageBox.Show("st:" + St + "str" + Str + "A" + C[2] + C[3]); // 第一個 卡牌名稱0 第二個 卡牌消耗1 第三個是 傷害2 第四個 不知道是啥3
+                        //MessageBox.Show("st:" + St + "str" + Str + "A" + C[2] + C[3]); // 第一個 卡牌名稱0 第二個 卡牌消耗1 第三個是 傷害2 第四個 護盾3
+                        
                         if (form1.mShield > int.Parse(C[2]))
                         {
                             form1.mShield -= int.Parse(C[2]);
                         }
                         else if (form1.mShield < int.Parse(C[2]))
-                            {
-                                int damage = int.Parse(C[2]) - form1.mShield;
-                                form1.mHealth -= damage;
-                            }
+                        {
+                            form1.mShield -= int.Parse(C[2]);
+                            form1.mHealth += form1.mShield;
+                            form1.mShield = 0;
+                        }
 
-                        form1.eShield = int.Parse(C[6]);
-                        form1.eHealth = int.Parse(C[5]);
-                        form1.eEnergy = int.Parse(C[4]);
-                        MessageBox.Show(form1.mHealth + " ");
+                        form1.eShield = int.Parse(C[6]);//敵方護盾
+                        form1.eHealth = int.Parse(C[5]);//敵方血量
+                        form1.eEnergy = int.Parse(C[4]);//敵方能量
+                        
+                        form1.ListboxUpdata($"對方使用了{C[0]}卡牌目前血量為:" + form1.eHealth + " 護盾值:" + form1.eShield + " 能量值:" + form1.eEnergy);
+
+                        //MessageBox.Show(form1.mHealth + " ");
                         form1.ListboxUpdata(form1.mHealth + Str);
                         form1.UpdateStatusUI();
                         break;
