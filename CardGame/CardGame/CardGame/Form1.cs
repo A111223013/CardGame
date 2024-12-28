@@ -31,6 +31,7 @@ namespace CardGame
         private string User; // 当前用户
         // 是否輪到玩家操作
         public bool IsPlayerTurn { get; set; } = false;
+        private bool isGameOver = false; // 標記遊戲是否結束
 
         public string OpponentName { get; set; }
         // 玩家和对手的状态
@@ -272,7 +273,6 @@ namespace CardGame
                 eEnergy = energy;
             }
             UpdateStatusUI();
-            CheckHealth();
         }
 
 
@@ -327,7 +327,7 @@ namespace CardGame
             label16.Text = eHealth.ToString();
             label17.Text = eEnergy.ToString();
             label23.Text = eShield.ToString();
-            
+            CheckHealth();
         }
        
         private void SendCardEffectToServer(Card card)
@@ -423,15 +423,21 @@ namespace CardGame
         }
         private void CheckHealth()
         {
+            // 避免重複觸發遊戲結束
+            if (isGameOver) return;
+
             // 解析玩家血量和敵人血量
             int playerHealth = int.Parse(label13.Text);
             int enemyHealth = int.Parse(label16.Text);
+
             if (playerHealth <= 0)
             {
+                isGameOver = true; // 標記遊戲結束
                 ShowGameResult("敵人獲勝！");
             }
             else if (enemyHealth <= 0)
             {
+                isGameOver = true; // 標記遊戲結束
                 ShowGameResult("玩家獲勝！");
             }
         }

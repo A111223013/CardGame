@@ -202,6 +202,10 @@ namespace CardGame
                         }
 
                         form1.eShield = int.Parse(C[6]);//敵方護盾
+                        if(form1.eShield < 0)
+                        {
+                            form1.eShield = 0;
+                        }
                         form1.eHealth = int.Parse(C[5]);//敵方血量
                         form1.eEnergy = int.Parse(C[4]);//敵方能量
                         
