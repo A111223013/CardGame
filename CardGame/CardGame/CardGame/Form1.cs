@@ -56,13 +56,14 @@ namespace CardGame
         public int card_health { get; set; }
 
         private List<Card> currentHand; // 当前手牌
-       
+        private bool isCardClicked = false;
+        
         public Form1()
         {
             InitializeComponent();
            button1.Enabled = false;
             // 隨機決定是否是先手
-            IsPlayerTurn = new Random().Next(0, 2) == 0;
+            IsPlayerTurn = random.Next(0, 2) == 0;
             SetControlsEnabled(IsPlayerTurn); // 如果是玩家回合，啟用控件
             // 如果是玩家回合，啟用按鈕
             if (IsPlayerTurn)
@@ -156,7 +157,7 @@ namespace CardGame
             new Card { Name = "破甲", Description = "造成4點傷害，能量消耗3", EnergyCost = 3, Damage = 4 , Health= 0, Deffence = 0, Energy = 0},
             new Card { Name = "治癒", Description = "回復2點血量，能量消耗1", EnergyCost = 1, Damage = 0, Health= 2, Deffence = 0,Energy = 0 },
             new Card { Name = "高級治癒", Description = "回復10點血量，能量消耗5", EnergyCost = 5, Damage = 0, Health= 10, Deffence = 0,Energy = 0 },
-            new Card { Name = "龍之啟示", Description = "能量最大值+1，能量消耗2", EnergyCost = 2, Damage = 0 , Health= 0, Deffence = 0, Energy = 1},
+            new Card { Name = "龍之啟示", Description = "能量最大值+1，能量消耗2", EnergyCost = 3, Damage = 0 , Health= 0, Deffence = 0, Energy = 1},
             new Card { Name = "護甲", Description = "增加2點護甲，能量消耗1", EnergyCost = 1, Damage = 0 , Health= 0, Deffence = 2,Energy = 0},
             new Card { Name = "九偉人之鎧", Description = "增加10點護甲，能量消耗5", EnergyCost = 5, Damage = 0, Health= 0, Deffence = 10 ,Energy = 0},
             new Card { Name = "我就是力量的花生", Description = "造成15點傷害，能量消耗7", EnergyCost = 7, Damage = 15, Health= 0, Deffence = 0 ,Energy = 0}
@@ -213,6 +214,7 @@ namespace CardGame
                 case "龍之啟示": return Properties.Resources.NO_22;
                 case "九偉人之鎧": return Properties.Resources.No_24;
                 case "我就是力量的花生": return Properties.Resources.No_26;
+                case "卡背": return Properties.Resources.No_99;
                 default: return Properties.Resources.No_01;
             }
         }
@@ -228,27 +230,41 @@ namespace CardGame
         // 當鼠標離開隱藏卡牌描述
         private void Card_MouseLeave(object sender, EventArgs e)
         {
+            if (isCardClicked) return; // 如果已點擊卡牌，不清空 label19
             label19.Text = "";
         }
-
+        
         // 點擊卡牌後執行卡牌效果
         private void Card_Click(object sender, EventArgs e)
         {
             PictureBox pb = sender as PictureBox;
+            if (!pb.Enabled)
+            {
+                
+                return;
+            }
             int index = int.Parse(pb.Tag.ToString());
             Card selectedCard = currentHand[index];
             //MessageBox.Show(selectedCard.Damage+"");
 
-            if (mEnergy < selectedCard.EnergyCost)
+            if (MaxEnergy < selectedCard.EnergyCost)
             {
                 MessageBox.Show("能量不足，无法使用此卡牌！");
                 return;
             }
-
+            // 設置標誌，防止鼠標事件干擾
+            isCardClicked = true;
             ApplyCardEffect(selectedCard);
             
             SendCardEffectToServer(selectedCard);
             LogToListBox2($"[INFO] 使用卡牌: {selectedCard.Name}，能量消耗: {selectedCard.EnergyCost}");
+            // 更改卡牌圖片並禁用點擊
+            pb.Image = Properties.Resources.No_99; // 替換為使用後的圖片資源
+            pb.Enabled = false; // 禁用點擊功能
+
+            label19.Text = $"使用卡牌: {selectedCard.Name}，能量消耗: {selectedCard.EnergyCost}\n" +
+                   $"傷害: {selectedCard.Damage}，護盾增加: {selectedCard.Deffence}，" +
+                   $"血量增加: {selectedCard.Health}，最大能量值增加: {selectedCard.Energy}";
             UpdateStatusUI();
         }
         public void ListboxUpdata(string cmd)
