@@ -174,7 +174,7 @@ namespace CardGame
         }
 
 
-        // 卡牌名稱與描述
+        
 
 
         // 随机抽取卡牌
@@ -271,15 +271,7 @@ namespace CardGame
         {
             listBox2.Items.Add("接收傳送的訊息: " + cmd);
 
-            // 確保 eHealth 從 UI 控件中獲取正確值
-            //if (int.TryParse(label16.Text, out int currentHealth))
-            //{
-              //  eHealth = currentHealth;
-            //}
-            //else
-            //{
-              //  MessageBox.Show("敵方血量數據無效！");
-            //}
+           
             // 更新敵方數據
             string[] parts = cmd.Split(',');
             if (parts.Length >= 3 && int.TryParse(parts[0], out int health) && int.TryParse(parts[1], out int shield) && int.TryParse(parts[2], out int energy))
@@ -332,7 +324,7 @@ namespace CardGame
             
         }
 
-        // 更新界面状态
+        // 更新界面
         public void UpdateStatusUI()
         {
             
@@ -351,7 +343,7 @@ namespace CardGame
             string message = $"EFFECT|{card.Name},{card.EnergyCost},{card.Damage},{mEnergy},{mHealth},{mShield}";
             card_value(card.Name, card.EnergyCost, card.Damage, 0,mEnergy,mHealth,mShield);
             //SendMessageToServer(message);
-            LogToListBox2($"[SEND] 发送卡牌效果: {message}");
+            LogToListBox2($"[SEND] 發送卡牌效果: {message}");
         }
         
         private void SendTurnEndtoServer()
@@ -375,25 +367,7 @@ namespace CardGame
                 listBox2.Items.Add(message);
             }
         }
-       
 
-        // 发送消息到服务器
-        private void Send(string message)
-        {
-            try
-            {
-                byte[] buffer = Encoding.Default.GetBytes(message);
-                T.Send(buffer, 0, buffer.Length, SocketFlags.None);
-                listBox2.Items.Add($"[SEND] {message}");
-            }
-            catch (Exception ex)
-            {
-                listBox2.Items.Add($"[ERROR] 發送失敗：{ex.Message}");
-            }
-        }
-
-
-        
 
         private void button1_Click(object sender, EventArgs e)
         {

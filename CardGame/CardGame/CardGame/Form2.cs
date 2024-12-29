@@ -42,8 +42,6 @@ namespace CardGame
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            // 隨機決定先後手
-            
 
             form1.OnDataSent += test_send;
             form1.OnCardSent += card_send;// 實例
